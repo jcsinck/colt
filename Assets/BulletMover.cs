@@ -18,7 +18,6 @@ public class BulletMover : MonoBehaviour {
 			Destroy(bulletObject);
 		}
 	}
-
 //	void OnCollisionEnter2D(Collision2D col)
 //	{
 //		if(col.gameObject.tag == "ENEMY")
