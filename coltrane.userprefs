@@ -1,14 +1,15 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\EnemySpawner.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\EnemyScript_Bezier.cs">
     <Files>
-      <File FileName="Assets\_scripts\PlayerController.cs" Line="68" Column="3" />
+      <File FileName="Assets\BackgroundScrollScript.cs" Line="7" Column="107" />
+      <File FileName="Assets\_scripts\PlayerController.cs" Line="1" Column="1" />
       <File FileName="..\shump\Assets\Standard Assets\Character Controllers\Sources\Scripts\main_character_script.cs" Line="1" Column="1" />
       <File FileName="Assets\BulletMover.cs" Line="1" Column="1" />
       <File FileName="Assets\BoundaryScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\EnemySpawner.cs" Line="68" Column="53" />
+      <File FileName="Assets\EnemySpawner.cs" Line="61" Column="46" />
       <File FileName="Assets\EnemyMover.cs" Line="1" Column="1" />
-      <File FileName="Assets\EnemyScript_Bezier.cs" Line="28" Column="47" />
+      <File FileName="Assets\EnemyScript_Bezier.cs" Line="21" Column="20" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
