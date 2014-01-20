@@ -17,6 +17,12 @@ public class PlayerController : MonoBehaviour {
 	public GameObject shipObject;
 
 	private float nextFireTime;
+	private int powerUpStage;
+
+	void Start()
+	{
+		powerUpStage = 0;
+	}
 
 	void Update()
 	{
@@ -24,7 +30,19 @@ public class PlayerController : MonoBehaviour {
 		bool spaceTapped = Input.GetKey(KeyCode.Space);
 		if(spaceTapped && currentTime > nextFireTime)
 		{
-			Instantiate(bullet, bulletSpawner.position, bulletSpawner.rotation);
+			if(powerUpStage > 0)
+			{
+				Instantiate(bullet, 
+				            new Vector3(bulletSpawner.position.x, bulletSpawner.position.y + .2f), 
+				            bulletSpawner.rotation);
+				Instantiate(bullet, 
+				            new Vector3(bulletSpawner.position.x, bulletSpawner.position.y - .2f), 
+				            bulletSpawner.rotation);
+			}
+			else
+			{
+				Instantiate(bullet, bulletSpawner.position, bulletSpawner.rotation);
+			}
 			nextFireTime = currentTime + fireRate;
 		}
 	}
@@ -64,6 +82,11 @@ public class PlayerController : MonoBehaviour {
 		{
 			Destroy(other.gameObject);
 			Destroy(shipObject);
+		}
+		if(other.tag == "POWERUP")
+		{
+			powerUpStage++;
+			Destroy(other.gameObject);
 		}
 	}
 }
