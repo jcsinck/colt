@@ -51,6 +51,7 @@
      <Compile Include="Assets\BulletMover.cs" />
      <Compile Include="Assets\BulletSpawner.cs" />
      <Compile Include="Assets\EnemyMover.cs" />
+     <Compile Include="Assets\EnemyMover_Boss.cs" />
      <Compile Include="Assets\EnemyScript_Bezier.cs" />
      <Compile Include="Assets\EnemySpawner.cs" />
      <Compile Include="Assets\PowerupScript.cs" />
