@@ -78,7 +78,8 @@ public class PlayerController : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if(other.tag == "ENEMY")
+		if(other.tag == "ENEMY"
+		   || other.tag == "ENEMY_BULLET")
 		{
 			Destroy(other.gameObject);
 			Destroy(shipObject);

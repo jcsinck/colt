@@ -56,6 +56,7 @@
      <Compile Include="Assets\EnemySpawner.cs" />
      <Compile Include="Assets\PowerupScript.cs" />
      <Compile Include="Assets\_scripts\PlayerController.cs" />
+     <Compile Include="Assets\enemy_bullet_mover.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

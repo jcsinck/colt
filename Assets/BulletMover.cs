@@ -9,13 +9,4 @@ public class BulletMover : MonoBehaviour {
 	void Start () {
 		rigidbody2D.velocity = Vector2.right * speed;
 	}
-	
-//	void OnCollisionEnter2D(Collision2D col)
-//	{
-//		if(col.gameObject.tag == "ENEMY")
-//		{
-//			Destroy(col.gameObject);
-//			Destroy(this);
-//		}
-//	}
 }
