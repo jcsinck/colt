@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviour {
 		{
 			Destroy(other.gameObject);
 			Destroy(shipObject);
+			Application.LoadLevel(0);
 		}
 		if(other.tag == "POWERUP")
 		{
