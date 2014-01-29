@@ -66,6 +66,7 @@ public class EnemySpawner : MonoBehaviour {
 	public float topLimit;
 
 	private float nextFireTime;
+	private float sceneLoadTime;
 	private ArrayList enemySpawnSequence;
 	private ArrayList enemyTypeList;
 
@@ -102,6 +103,8 @@ public class EnemySpawner : MonoBehaviour {
 		enemyTypeList.Add(enemyObjectTwo);
 		enemyTypeList.Add(enemyObjectThree);
 		enemyTypeList.Add(enemyObjectFour);
+
+		sceneLoadTime = Time.time;
 	}
 
 	// Update is called once per frame
@@ -109,7 +112,7 @@ public class EnemySpawner : MonoBehaviour {
 		if(enemySpawnSequence.Count <= 0)
 			return;
 
-		float currentTime = Time.time;
+		float currentTime = Time.time - sceneLoadTime;
 		EnemySpawnData data = (EnemySpawnData) enemySpawnSequence[0];
 		float yCoordinate = determineBulletLocationWithPercentage(data.getYSpawnPercentage());
 
