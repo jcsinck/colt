@@ -10,6 +10,7 @@ public class SubWeaponSelect : MonoBehaviour {
 	private float screenHeight;
 
 	private GUIStyle headerTextStyle;
+	private GameData gameData;
 	
 	// Use this for initialization
 	void Start () {
@@ -23,6 +24,8 @@ public class SubWeaponSelect : MonoBehaviour {
 		headerTextStyle.fontSize = 32;
 		headerTextStyle.alignment = TextAnchor.UpperCenter;
 		headerTextStyle.normal.textColor = Color.white;
+
+		gameData = (GameData) GameObject.FindGameObjectWithTag("GAME_DATA").GetComponent("GameData");
 	}
 	
 	// Update is called once per frame
@@ -39,6 +42,7 @@ public class SubWeaponSelect : MonoBehaviour {
 		                       BUTTON_WIDTH, 
 		                       BUTTON_HEIGHT), 
 		              "SUB WEAPON ONE")) {
+			gameData.subWeaponType = 0;
 			Application.LoadLevel(3);
 		}
 
@@ -47,6 +51,7 @@ public class SubWeaponSelect : MonoBehaviour {
 		                       BUTTON_WIDTH, 
 		                       BUTTON_HEIGHT), 
 		              "SUB WEAPON TWO")) {
+			gameData.subWeaponType = 1;
 			Application.LoadLevel(3);
 		}
 
@@ -55,6 +60,7 @@ public class SubWeaponSelect : MonoBehaviour {
 		                       BUTTON_WIDTH, 
 		                       BUTTON_HEIGHT), 
 		              "SUB WEAPON THREE")) {
+			gameData.subWeaponType = 2;
 			Application.LoadLevel(3);
 		}
 	}

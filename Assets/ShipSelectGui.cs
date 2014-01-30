@@ -9,6 +9,8 @@ public class ShipSelectGui : MonoBehaviour {
 	private float screenWidth;
 	private float screenHeight;
 
+	private GameData gameData;
+
 	// Use this for initialization
 	void Start () {
 		screenWidth = Screen.width;
@@ -16,6 +18,8 @@ public class ShipSelectGui : MonoBehaviour {
 
 		print(Screen.width);
 		print(Screen.height);
+
+		gameData = (GameData) GameObject.FindGameObjectWithTag("GAME_DATA").GetComponent("GameData");
 	}
 	
 	// Update is called once per frame
@@ -33,6 +37,7 @@ public class ShipSelectGui : MonoBehaviour {
 		                       BUTTON_WIDTH, 
 		                       BUTTON_HEIGHT), 
 		              "SHIP ONE")) {
+			gameData.selectedShipType = 0;
 			Application.LoadLevel(2);
 		}
 
@@ -41,6 +46,7 @@ public class ShipSelectGui : MonoBehaviour {
 		                       BUTTON_WIDTH, 
 		                       BUTTON_HEIGHT), 
 		              "SHIP TWO")) {
+			gameData.selectedShipType = 1;
 			Application.LoadLevel(2);
 		}
 
@@ -49,6 +55,7 @@ public class ShipSelectGui : MonoBehaviour {
 		                       BUTTON_WIDTH, 
 		                       BUTTON_HEIGHT), 
 		              "SHIP THREE")) {
+			gameData.selectedShipType = 2;
 			Application.LoadLevel(2);
 		}
 	}

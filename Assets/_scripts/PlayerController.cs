@@ -11,39 +11,45 @@ public class PlayerController : MonoBehaviour {
 	public float speed;
 	public Boundary boundary;
 	public float fireRate;
+	public float subFireRate;
 
 	public Transform bulletSpawner;
 	public GameObject bullet;
+	public GameObject subWeaponBullet;
 	public GameObject shipObject;
 
-	private float nextFireTime;
-	private int powerUpStage;
+	private float nextMainWeaponFireTime;
+	private float nextSubWeaponFireTime;
+	private GameData gameData;
 
 	void Start()
 	{
-		powerUpStage = 0;
+		GameObject gameDataObject = GameObject.FindGameObjectWithTag("GAME_DATA");
+		if(gameDataObject == null)
+		{
+			Application.LoadLevel(0);
+		}
+		else
+		{
+			gameData = (GameData) gameDataObject.GetComponent("GameData");
+		}
 	}
 
 	void Update()
 	{
 		float currentTime = Time.time;
 		bool spaceTapped = Input.GetKey(KeyCode.Space);
-		if(spaceTapped && currentTime > nextFireTime)
+		if(spaceTapped && currentTime > nextMainWeaponFireTime)
 		{
-			if(powerUpStage > 0)
-			{
-				Instantiate(bullet, 
-				            new Vector3(bulletSpawner.position.x, bulletSpawner.position.y + .2f), 
-				            bulletSpawner.rotation);
-				Instantiate(bullet, 
-				            new Vector3(bulletSpawner.position.x, bulletSpawner.position.y - .2f), 
-				            bulletSpawner.rotation);
-			}
-			else
-			{
-				Instantiate(bullet, bulletSpawner.position, bulletSpawner.rotation);
-			}
-			nextFireTime = currentTime + fireRate;
+			FireMainWeapon();
+			nextMainWeaponFireTime = currentTime + fireRate;
+		}
+
+		bool nTapped = Input.GetKey(KeyCode.N);
+		if(nTapped && currentTime > nextSubWeaponFireTime)
+		{
+			FireSubWeapon();
+			nextSubWeaponFireTime = currentTime + subFireRate;
 		}
 	}
 
@@ -76,6 +82,29 @@ public class PlayerController : MonoBehaviour {
 			Mathf.Clamp(this.transform.position.y, boundary.zMin, boundary.zMax));
 	}
 
+	void FireMainWeapon()
+	{
+		int mainWeaponStage = gameData.getMainWeaponStageWithType(gameData.currentMainWeaponType);
+		if(mainWeaponStage > 0)
+		{
+			Instantiate(bullet, 
+			            new Vector3(bulletSpawner.position.x, bulletSpawner.position.y + .2f), 
+			            bulletSpawner.rotation);
+			Instantiate(bullet, 
+			            new Vector3(bulletSpawner.position.x, bulletSpawner.position.y - .2f), 
+			            bulletSpawner.rotation);
+		}
+		else
+		{
+			Instantiate(bullet, bulletSpawner.position, bulletSpawner.rotation);
+		}
+	}
+
+	void FireSubWeapon()
+	{
+		Instantiate(subWeaponBullet, bulletSpawner.position, bulletSpawner.rotation);
+	}
+
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		if(other.tag == "ENEMY"
@@ -87,7 +116,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		if(other.tag == "POWERUP")
 		{
-			powerUpStage++;
+			gameData.powerupAcquiredWithType(gameData.currentMainWeaponType);
 			Destroy(other.gameObject);
 		}
 	}
