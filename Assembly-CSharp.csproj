@@ -59,6 +59,7 @@
      <Compile Include="Assets\ShipSelectGui.cs" />
      <Compile Include="Assets\SubBullet1Mover.cs" />
      <Compile Include="Assets\SubWeaponSelect.cs" />
+     <Compile Include="Assets\_scripts\Bullet.cs" />
      <Compile Include="Assets\_scripts\PlayerController.cs" />
      <Compile Include="Assets\enemy_bullet_mover.cs" />
      <Compile Include="Assets\guiScript.cs" />

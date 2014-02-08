@@ -49,11 +49,16 @@ public class EnemyScript_Bezier : MonoBehaviour {
 	{
 		if(other.tag == "BULLET")
 		{
-			Destroy(other.gameObject);
+			Bullet bullet = (Bullet) other.gameObject.GetComponent(typeof(Bullet));
+			if(bullet.DestroyOnContact())
+			{
+				Destroy(other.gameObject);
+			}
 
+			int damage = bullet.BulletDamage();
 			if(health > 0)
 			{
-				health--;
+				health -= damage;
 				return;
 			}
 

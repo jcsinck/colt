@@ -60,6 +60,9 @@ public class EnemySpawner : MonoBehaviour {
 	public GameObject enemyObjectThree;
 	public GameObject enemyObjectFour;
 
+	public GameObject playerObjectOne;
+	public GameObject playerObjectTwo;
+
 	public Transform enemySpawnerObject;
 	public float fireRate;
 	public float border;
@@ -69,9 +72,10 @@ public class EnemySpawner : MonoBehaviour {
 	private float sceneLoadTime;
 	private ArrayList enemySpawnSequence;
 	private ArrayList enemyTypeList;
+	private GameData gameData;
 
 	void Start () {
-		enemySpawnSequence = new ArrayList(); //Array.CreateInstance(typeof(EnemySpawnData), 2);
+		enemySpawnSequence = new ArrayList();
 		enemySpawnSequence.Add(new EnemySpawnData(5, 1, 1));
 		enemySpawnSequence.Add(new EnemySpawnData(6, 1, 1));
 		enemySpawnSequence.Add(new EnemySpawnData(7, 1, 1));
@@ -105,6 +109,8 @@ public class EnemySpawner : MonoBehaviour {
 		enemyTypeList.Add(enemyObjectFour);
 
 		sceneLoadTime = Time.time;
+
+		GetGlobalGameData();
 	}
 
 	// Update is called once per frame
@@ -136,5 +142,36 @@ public class EnemySpawner : MonoBehaviour {
 	{
 		Destroy(bossObject.GetComponent("EnemyMover_Boss"));
 		Application.LoadLevel(0);
+	}
+
+	private void GetGlobalGameData()
+	{
+		GameObject gameDataObject = GameObject.FindGameObjectWithTag("GAME_DATA");
+		if(gameDataObject == null)
+		{
+			Application.LoadLevel(0);
+		}
+		else
+		{
+			gameData = (GameData) gameDataObject.GetComponent("GameData");
+			InstantiatePlayerShip();
+		}
+	}
+
+	private void InstantiatePlayerShip()
+	{
+		GameObject targetGameObject = null;
+		Quaternion rotation = Quaternion.identity;
+		if(gameData.selectedShipType == 0)
+		{
+			targetGameObject = playerObjectOne;
+			rotation = Quaternion.Euler(0, 0, 270.0f);
+		}
+		else if(gameData.selectedShipType == 1)
+		{
+			targetGameObject = playerObjectTwo;
+		}
+
+		Instantiate(targetGameObject, new Vector3(1.41f, 0.074f), rotation);
 	}
 }
