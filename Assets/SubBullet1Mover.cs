@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SubBullet1Mover : MonoBehaviour {
+public class SubBullet1Mover : Bullet {
 	public float speed;
 	public float radius;
 

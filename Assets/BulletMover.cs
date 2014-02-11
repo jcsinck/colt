@@ -12,11 +12,11 @@ public class BulletMover : Bullet {
 
 	public override bool DestroyOnContact()
 	{
-		return false;
+		return true;
 	}
 
 	public override int BulletDamage()
 	{
-		return 4;
+		return 1;
 	}
 }

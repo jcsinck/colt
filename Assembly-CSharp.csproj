@@ -55,6 +55,7 @@
      <Compile Include="Assets\EnemyScript_Bezier.cs" />
      <Compile Include="Assets\EnemySpawner.cs" />
      <Compile Include="Assets\GameData.cs" />
+     <Compile Include="Assets\MashLightning.cs" />
      <Compile Include="Assets\PowerupScript.cs" />
      <Compile Include="Assets\ShipSelectGui.cs" />
      <Compile Include="Assets\SubBullet1Mover.cs" />

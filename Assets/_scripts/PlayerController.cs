@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour {
 	public Transform bulletSpawner;
 	public GameObject bullet;
 	public GameObject subWeaponBullet;
+	public GameObject subWeaponBulletTwo;
 	public GameObject shipObject;
 
 	private float nextMainWeaponFireTime;
@@ -102,7 +103,10 @@ public class PlayerController : MonoBehaviour {
 
 	void FireSubWeapon()
 	{
-		Instantiate(subWeaponBullet, bulletSpawner.position, bulletSpawner.rotation);
+		if(gameData.subWeaponType == 0)
+			Instantiate(subWeaponBullet, bulletSpawner.position, bulletSpawner.rotation);
+		else if(gameData.subWeaponType == 1)
+			Instantiate(subWeaponBulletTwo, bulletSpawner.position, Quaternion.Euler(0f, 0f, 90.0f));
 	}
 
 	void OnTriggerEnter2D(Collider2D other)

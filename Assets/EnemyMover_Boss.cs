@@ -66,23 +66,27 @@ public class EnemyMover_Boss : MonoBehaviour {
 	{
 		if(other.tag == "BULLET")
 		{
-			Destroy(other.gameObject);
-
-			if(health > 0)
+			Bullet bullet = (Bullet) other.gameObject.GetComponent(typeof(Bullet));
+			if(bullet.DestroyOnContact())
 			{
-				health--;
-				return;
+				Destroy(other.gameObject);
 			}
-
-			if(!isBoss)
+			
+			int damage = bullet.BulletDamage();
+			health -= damage;
+			
+			if(health < 0)
 			{
-				Destroy(enemyObject);
-			}
-			else
-			{
-				GameObject obj = GameObject.Find("enemy_spawner");
-				EnemySpawner es = (EnemySpawner) obj.GetComponent("EnemySpawner");
-				es.bossDefeated(this);
+				if(!isBoss)
+				{
+					Destroy(enemyObject);
+				}
+				else
+				{
+					GameObject obj = GameObject.Find("enemy_spawner");
+					EnemySpawner es = (EnemySpawner) obj.GetComponent("EnemySpawner");
+					es.bossDefeated(this);
+				}
 			}
 		}
 	}

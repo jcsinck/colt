@@ -22,13 +22,12 @@ public class EnemyMover : MonoBehaviour {
 			}
 
 			int damage = bullet.BulletDamage();
-			if(health > 0)
-			{
-				health -= damage;
-				return;
-			}
+			health -= damage;
 
-			Destroy(enemyObject);
+			if(health < 0)
+			{
+				Destroy(enemyObject);
+			}
 		}
 	}
 }
