@@ -171,6 +171,10 @@ public class EnemySpawner : MonoBehaviour {
 		{
 			targetGameObject = playerObjectTwo;
 		}
+		else
+		{
+			targetGameObject = playerObjectTwo;
+		}
 
 		Instantiate(targetGameObject, new Vector3(1.41f, 0.074f), rotation);
 	}

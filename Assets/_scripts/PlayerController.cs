@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour {
 	private float nextMainWeaponFireTime;
 	private float nextSubWeaponFireTime;
 	private GameData gameData;
+	private bool subWeaponRapidFire;
 
 	void Start()
 	{
@@ -33,6 +34,7 @@ public class PlayerController : MonoBehaviour {
 		else
 		{
 			gameData = (GameData) gameDataObject.GetComponent("GameData");
+			SetWeaponFireRates();
 		}
 	}
 
@@ -46,7 +48,12 @@ public class PlayerController : MonoBehaviour {
 			nextMainWeaponFireTime = currentTime + fireRate;
 		}
 
-		bool nTapped = Input.GetKey(KeyCode.N);
+		bool nTapped = false;
+		if(subWeaponRapidFire)
+			nTapped = Input.GetKey(KeyCode.N);
+		else
+			nTapped = Input.GetKeyDown(KeyCode.N);
+
 		if(nTapped && currentTime > nextSubWeaponFireTime)
 		{
 			FireSubWeapon();
@@ -107,6 +114,15 @@ public class PlayerController : MonoBehaviour {
 			Instantiate(subWeaponBullet, bulletSpawner.position, bulletSpawner.rotation);
 		else if(gameData.subWeaponType == 1)
 			Instantiate(subWeaponBulletTwo, bulletSpawner.position, Quaternion.Euler(0f, 0f, 90.0f));
+		else
+			Instantiate(subWeaponBulletTwo, bulletSpawner.position, Quaternion.Euler(0f, 0f, 90.0f));
+	}
+
+	void SetWeaponFireRates()
+	{
+		fireRate = gameData.getPrimaryWeaponFireRateForWeaponType(gameData.selectedShipType);
+		subFireRate = gameData.getSubWeaponFireRateForWeaponType(gameData.subWeaponType);
+		subWeaponRapidFire = gameData.isSubWeaponRapidFireWithWeapon(gameData.subWeaponType);
 	}
 
 	void OnTriggerEnter2D(Collider2D other)

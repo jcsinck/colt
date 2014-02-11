@@ -45,4 +45,32 @@ public class GameData : MonoBehaviour {
 	{
 		mainWeaponStages[type]++;
 	}
+
+	public float getPrimaryWeaponFireRateForWeaponType(int weapType)
+	{
+		if(weapType == 0)
+			return 0.1f;
+		else if(weapType == 1)
+			return 0.45f;
+
+		return 0.1f;
+	}
+
+	public float getSubWeaponFireRateForWeaponType(int weapType)
+	{
+		if(weapType == 0)
+			return 0.3f;
+		else if(weapType == 1)
+			return 0.01f;
+
+		return 0.1f;
+	}
+
+	public bool isSubWeaponRapidFireWithWeapon(int weapType)
+	{
+		if(subWeaponType == 1)
+			return false;
+
+		return true;
+	}
 }
