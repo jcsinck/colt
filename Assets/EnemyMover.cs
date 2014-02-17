@@ -24,6 +24,8 @@ public class EnemyMover : MonoBehaviour {
 			int damage = bullet.BulletDamage();
 			health -= damage;
 
+			rigidbody2D.velocity = Vector2.right * -1 * speed;
+
 			if(health < 0)
 			{
 				Destroy(enemyObject);

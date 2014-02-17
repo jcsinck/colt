@@ -1,16 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\_scripts\PlayerController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\EnemySpawner.cs">
     <Files>
+      <File FileName="Assets\EnemyMover.cs" Line="11" Column="25" />
       <File FileName="Assets\EnemyScript_Bezier.cs" Line="1" Column="1" />
       <File FileName="Assets\EnemyMover_Boss.cs" Line="1" Column="1" />
-      <File FileName="Assets\EnemyMover.cs" Line="17" Column="4" />
-      <File FileName="Assets\BulletMover.cs" Line="1" Column="1" />
-      <File FileName="Assets\ShipSelectGui.cs" Line="1" Column="1" />
-      <File FileName="Assets\_scripts\PlayerController.cs" Line="118" Column="93" />
-      <File FileName="Assets\GameData.cs" Line="74" Column="15" />
-      <File FileName="Assets\EnemySpawner.cs" Line="176" Column="39" />
-      <File FileName="Assets\SubWeaponSelect.cs" Line="1" Column="1" />
+      <File FileName="Assets\EnemySpawner.cs" Line="89" Column="37" />
+      <File FileName="Assets\TriggerTest.cs" Line="7" Column="17" />
+      <File FileName="Assets\_scripts\PlayerController.cs" Line="67" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

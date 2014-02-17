@@ -125,16 +125,16 @@ public class PlayerController : MonoBehaviour {
 		subWeaponRapidFire = gameData.isSubWeaponRapidFireWithWeapon(gameData.subWeaponType);
 	}
 
-	void OnTriggerEnter2D(Collider2D other)
+	void OnCollisionEnter2D(Collision2D other)
 	{
-		if(other.tag == "ENEMY"
-		   || other.tag == "ENEMY_BULLET")
+		if(other.gameObject.tag == "ENEMY"
+		   || other.gameObject.tag == "ENEMY_BULLET")
 		{
 			Destroy(other.gameObject);
 			Destroy(shipObject);
 			Application.LoadLevel(0);
 		}
-		if(other.tag == "POWERUP")
+		if(other.gameObject.tag == "POWERUP")
 		{
 			gameData.powerupAcquiredWithType(gameData.currentMainWeaponType);
 			Destroy(other.gameObject);
