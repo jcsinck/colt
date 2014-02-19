@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour {
 	private float nextSubWeaponFireTime;
 	private GameData gameData;
 	private bool subWeaponRapidFire;
+	private bool pauseGame;
 
 	void Start()
 	{
@@ -35,13 +36,14 @@ public class PlayerController : MonoBehaviour {
 		{
 			gameData = (GameData) gameDataObject.GetComponent("GameData");
 			SetWeaponFireRates();
+			pauseGame = false;
 		}
 	}
 
 	void Update()
 	{
 		float currentTime = Time.time;
-		bool spaceTapped = Input.GetKey(KeyCode.Space);
+		bool spaceTapped = Input.GetKey(KeyCode.Space) && !pauseGame;
 		if(spaceTapped && currentTime > nextMainWeaponFireTime)
 		{
 			FireMainWeapon();
@@ -54,11 +56,16 @@ public class PlayerController : MonoBehaviour {
 		else
 			nTapped = Input.GetKeyDown(KeyCode.N);
 
+		nTapped = nTapped && !pauseGame;
 		if(nTapped && currentTime > nextSubWeaponFireTime)
 		{
 			FireSubWeapon();
 			nextSubWeaponFireTime = currentTime + subFireRate;
 		}
+
+		bool pausePressed = Input.GetKeyDown(KeyCode.Return);
+		if(pausePressed)
+			flipPauseState();
 	}
 
 	void FixedUpdate()
@@ -123,6 +130,15 @@ public class PlayerController : MonoBehaviour {
 		fireRate = gameData.getPrimaryWeaponFireRateForWeaponType(gameData.selectedShipType);
 		subFireRate = gameData.getSubWeaponFireRateForWeaponType(gameData.subWeaponType);
 		subWeaponRapidFire = gameData.isSubWeaponRapidFireWithWeapon(gameData.subWeaponType);
+	}
+
+	void flipPauseState()
+	{
+		pauseGame = !pauseGame;
+		if(pauseGame)
+			Time.timeScale = 0.0f;
+		else
+			Time.timeScale = 1.0f;
 	}
 
 	void OnCollisionEnter2D(Collision2D other)
