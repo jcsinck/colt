@@ -1,16 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\_scripts\PlayerController.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\gui_renderer.cs">
     <Files>
-      <File FileName="Assets\EnemySpawner.cs" Line="117" Column="18" />
-      <File FileName="Assets\EnemyMover.cs" Line="1" Column="1" />
-      <File FileName="Assets\EnemyScript_Bezier.cs" Line="1" Column="1" />
-      <File FileName="Assets\EnemyMover_Boss.cs" Line="1" Column="1" />
-      <File FileName="Assets\EnemySpawner.cs" Line="116" Column="22" />
-      <File FileName="Assets\TriggerTest.cs" Line="1" Column="1" />
-      <File FileName="Assets\_scripts\PlayerController.cs" Line="56" Column="7" />
-      <File FileName="Assets\BackgroundScrollScript.cs" Line="7" Column="44" />
-      <File FileName="Assets\PowerupScript.cs" Line="8" Column="33" />
+      <File FileName="Assets\gui_renderer.cs" Line="29" Column="31" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
