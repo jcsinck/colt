@@ -6,6 +6,7 @@ public class EnemySpawnData {
 	private int enemyType;
 	private double ySpawnPercentage;
 	private bool isBoss;
+	private bool isCheckpoint;
 	
 	public EnemySpawnData() {
 		location = 10;
@@ -37,6 +38,12 @@ public class EnemySpawnData {
 		ySpawnPercentage = perc;
 		isBoss = isBos;
 	}
+
+	public EnemySpawnData(int loc, bool isCp)
+	{
+		location = loc;
+		isCheckpoint = isCp;
+	}
 	
 	public int getLocation()
 	{
@@ -51,6 +58,11 @@ public class EnemySpawnData {
 	public double getYSpawnPercentage()
 	{
 		return ySpawnPercentage;
+	}
+
+	public bool isSpawnCheckpoint()
+	{
+		return isCheckpoint;
 	}
 }
 
@@ -88,6 +100,7 @@ public class EnemySpawner : MonoBehaviour {
 		enemySpawnSequence.Add(new EnemySpawnData(16, 0, .3));
 		enemySpawnSequence.Add(new EnemySpawnData(16, 0, .5));
 		enemySpawnSequence.Add(new EnemySpawnData(16, 0, .7));
+		enemySpawnSequence.Add(new EnemySpawnData(18, true));
 		enemySpawnSequence.Add(new EnemySpawnData(20, 0, .18));
 		enemySpawnSequence.Add(new EnemySpawnData(20, 0, .36));
 		enemySpawnSequence.Add(new EnemySpawnData(20, 0, .54));
@@ -110,6 +123,8 @@ public class EnemySpawner : MonoBehaviour {
 
 		sceneLoadTime = Time.time;
 
+		//at the moment, nothing can be called after this function. 
+		//if you need to add additional functionality, jump to this functions definition and add it there.
 		GetGlobalGameData();
 	}
 
@@ -120,15 +135,23 @@ public class EnemySpawner : MonoBehaviour {
 
 		float currentTime = Time.time - sceneLoadTime;
 		EnemySpawnData data = (EnemySpawnData) enemySpawnSequence[0];
-		float yCoordinate = determineBulletLocationWithPercentage(data.getYSpawnPercentage());
-
-		UnityEngine.Object enemyToSpawn = (UnityEngine.Object) enemyTypeList[data.getEnemyType()];
-		if(currentTime >= data.getLocation())
+		if(data.isSpawnCheckpoint())
 		{
-			Instantiate(enemyToSpawn, 
-			            new Vector3(enemySpawnerObject.position.x, yCoordinate, enemySpawnerObject.position.z), 
-			            enemySpawnerObject.rotation);
+			gameData.checkpointReached();
 			enemySpawnSequence.RemoveAt(0);
+		}
+		else
+		{
+			float yCoordinate = determineBulletLocationWithPercentage(data.getYSpawnPercentage());
+			
+			UnityEngine.Object enemyToSpawn = (UnityEngine.Object) enemyTypeList[data.getEnemyType()];
+			if(currentTime >= data.getLocation())
+			{
+				Instantiate(enemyToSpawn, 
+				            new Vector3(enemySpawnerObject.position.x, yCoordinate, enemySpawnerObject.position.z), 
+				            enemySpawnerObject.rotation);
+				enemySpawnSequence.RemoveAt(0);
+			}
 		}
 	}
 
@@ -144,6 +167,11 @@ public class EnemySpawner : MonoBehaviour {
 		Application.LoadLevel(0);
 	}
 
+	public void PlayerDefeated()
+	{
+		Application.LoadLevel(3);
+	}
+
 	private void GetGlobalGameData()
 	{
 		GameObject gameDataObject = GameObject.FindGameObjectWithTag("GAME_DATA");
@@ -155,6 +183,10 @@ public class EnemySpawner : MonoBehaviour {
 		{
 			gameData = (GameData) gameDataObject.GetComponent("GameData");
 			InstantiatePlayerShip();
+
+			int lastCP = gameData.getLastCheckpointReached();
+			if(lastCP > 0)
+				FilterSpawnToCheckpointIndex(lastCP);
 		}
 	}
 
@@ -177,5 +209,25 @@ public class EnemySpawner : MonoBehaviour {
 		}
 
 		Instantiate(targetGameObject, new Vector3(1.41f, 0.074f), rotation);
+	}
+
+	private void FilterSpawnToCheckpointIndex(int index)
+	{
+		int checkpointsReached = 0;
+		while(enemySpawnSequence.Count >= 0)
+		{
+			EnemySpawnData data = (EnemySpawnData) enemySpawnSequence[0];
+			if(data.isSpawnCheckpoint())
+			{
+				checkpointsReached++;
+				if(checkpointsReached >= index)
+				{
+					sceneLoadTime -= data.getLocation();
+					return;
+				}
+			}
+			else
+				enemySpawnSequence.RemoveAt(0);
+		}
 	}
 }

@@ -21,6 +21,8 @@ public class EnemyScript_Bezier : MonoBehaviour {
 	public int health;
 	public GameObject enemyObject;
 
+	private Animator anim;
+
 	void Start()
 	{
 		StartPointX = this.transform.position.x;
@@ -29,6 +31,8 @@ public class EnemyScript_Bezier : MonoBehaviour {
 		ControlPointY = StartPointY + controlPointYIncrement;
 		EndPointX = StartPointX + endPointXIncrement;
 		EndPointY = StartPointY + endPointYIncrement;
+
+		anim = (Animator) this.GetComponent("Animator");
 	}
 
 	// Update is called once per frame
@@ -60,7 +64,8 @@ public class EnemyScript_Bezier : MonoBehaviour {
 
 			if(health < 0)
 			{
-				Destroy(enemyObject);
+				anim.SetBool("destroyed", true);
+				Destroy(enemyObject, .5f);
 			}
 		}
 	}

@@ -1,8 +1,17 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\gui_renderer.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\EnemyScript_Bezier.cs">
     <Files>
-      <File FileName="Assets\gui_renderer.cs" Line="29" Column="31" />
+      <File FileName="Assets\EnemyScript_Bezier.cs" Line="68" Column="28" />
+      <File FileName="Assets\EnemyMover.cs" Line="1" Column="1" />
+      <File FileName="Assets\EnemyScript_Bezier.cs" Line="68" Column="28" />
+      <File FileName="Assets\PowerupScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\BackgroundScrollScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\BoundaryScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\BulletSpawner.cs" Line="1" Column="1" />
+      <File FileName="Assets\enemy_bullet_mover.cs" Line="1" Column="1" />
+      <File FileName="Assets\EnemyMover_Boss.cs" Line="1" Column="1" />
+      <File FileName="Assets\EnemySpawner.cs" Line="101" Column="29" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

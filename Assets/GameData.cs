@@ -14,6 +14,9 @@ public class GameData : MonoBehaviour {
 	public int subWeaponType;
 	public int subWeaponStage;
 
+	//progression data
+	public int lastCheckpointReached;
+
 	// Use this for initialization
 	void Start () {
 		DontDestroyOnLoad(this);
@@ -29,11 +32,8 @@ public class GameData : MonoBehaviour {
 
 		subWeaponType = 0;
 		subWeaponStage = 0;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+		lastCheckpointReached = 0;
 	}
 
 	public int getMainWeaponStageWithType(int type)
@@ -72,5 +72,15 @@ public class GameData : MonoBehaviour {
 			return false;
 
 		return true;
+	}
+
+	public int getLastCheckpointReached()
+	{
+		return lastCheckpointReached;
+	}
+
+	public void checkpointReached()
+	{
+		lastCheckpointReached++;
 	}
 }

@@ -148,7 +148,9 @@ public class PlayerController : MonoBehaviour {
 		{
 			Destroy(other.gameObject);
 			Destroy(shipObject);
-			Application.LoadLevel(0);
+			GameObject go = GameObject.Find("enemy_spawner");
+			EnemySpawner es = (EnemySpawner) go.GetComponent("EnemySpawner");
+			es.PlayerDefeated();
 		}
 		if(other.gameObject.tag == "POWERUP")
 		{

@@ -6,9 +6,15 @@ public class EnemyMover : MonoBehaviour {
 	public int health;
 	public GameObject enemyObject;
 
+	private Animator anim;
+
 	// Use this for initialization
 	void Start () {
 		rigidbody2D.velocity = Vector2.right * -1 * speed;
+		anim = (Animator)this.GetComponent("Animator");
+	}
+
+	void Update() {
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
@@ -28,7 +34,8 @@ public class EnemyMover : MonoBehaviour {
 
 			if(health < 0)
 			{
-				Destroy(enemyObject);
+				anim.SetBool("destroyed", true);
+				Destroy(enemyObject, .5f);
 			}
 		}
 	}
