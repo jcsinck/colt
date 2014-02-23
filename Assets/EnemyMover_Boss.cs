@@ -8,6 +8,7 @@ public class EnemyMover_Boss : MonoBehaviour {
 	public GameObject enemyBulletObject;
 	public int speed;
 	public bool isBoss;
+	public float horizontalThreshold;
 
 	private bool horizontalPositionReached;
 	private float nextFireTime;
@@ -22,7 +23,7 @@ public class EnemyMover_Boss : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(this.transform.position.x <= 10
+		if(this.transform.position.x <= horizontalThreshold
 		   && !horizontalPositionReached)
 		{
 			horizontalPositionReached = true;
@@ -32,8 +33,9 @@ public class EnemyMover_Boss : MonoBehaviour {
 		BoxCollider2D boundaryBoxCollider = (BoxCollider2D) boundaryBox.GetComponent("BoxCollider2D");
 		Vector2 boundaryBoxScale = boundaryBox.transform.lossyScale;
 
-		float upperBound = 1;//boundaryBox.renderer.bounds.center.y + boundaryBox.renderer.bounds.extents.y;
-		float lowerBound = 1;//boundaryBox.renderer.bounds.center.y - boundaryBox.renderer.bounds.extents.y;
+		BoxCollider2D boundaryCollider = (BoxCollider2D) boundaryBox.collider2D;
+		float upperBound = boundaryBox.transform.position.y + boundaryCollider.size.y * boundaryBox.transform.lossyScale.y / 2.0f; //boundaryBox.transform.position.y + boundaryBox.transform.lossyScale.y;
+		float lowerBound = boundaryBox.transform.position.y - boundaryCollider.size.y * boundaryBox.transform.lossyScale.y / 2.0f; //boundaryBox.transform.position.y - boundaryBox.transform.lossyScale.y;
 		Mesh mesh = ((MeshFilter)boundaryBox.GetComponent(typeof(MeshFilter))).mesh;
 
 		if(horizontalPositionReached 
